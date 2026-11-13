@@ -1,0 +1,105 @@
+/* =========================================================
+   Memory — КАРКАС стилів (нейтральний, сірий).
+   Тут лише те, без чого гра не працює.
+   Вигляд гри — ваш: ви оформите її за дизайн-паспортом команди
+   у кроці «Оформлення» практикуму.
+   ========================================================= */
+
+/* 1. ЗМІННІ. У кроці «Оформлення» замініть значення кольорами своєї палітри.
+      В інших місцях файла кольори беріть ЛИШЕ через var(--…). */
+:root {
+  --bg: #f3f4f6;
+  --surface: #e5e7eb;
+  --text: #111827;
+  --accent: #6b7280;
+  --accent2: #9ca3af;
+  --muted: color-mix(in srgb, var(--text) 60%, var(--bg));
+  --line: color-mix(in srgb, var(--text) 25%, var(--bg));
+  --radius: 10px;
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 2. СТОРІНКА І ПОЛЕ */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+}
+
+.game {
+  width: min(92vw, 520px);
+  padding: 28px 0 40px;
+}
+
+.game-title {
+  margin: 0 0 16px;
+  font-size: 28px;
+}
+
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* 3. КАРТКА: закрита (сорочка) */
+.card {
+  position: relative;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.card::before {
+  content: '?';
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* 4. ФУНКЦІОНАЛЬНА ЧАСТИНА — не видаляйте.
+      Картинка схована, поки картка закрита, і показується,
+      коли картка відкрита (opened) або відгадана (finished). */
+.card-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  object-fit: contain;
+  background: var(--bg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.card.opened .card-face,
+.card.finished .card-face {
+  opacity: 1;
+}
+
+/* 5. КАРТКА: відкрита і відгадана (мінімальна різниця — зробіть свою) */
+.card.opened {
+  border-color: var(--text);
+}
+
+.card.finished {
+  border-style: dashed;
+  opacity: 0.45;
+  cursor: default;
+}
