@@ -3,6 +3,9 @@ import Card from './Card';
 export default function Grid({ cards }) {
   const openedItems = ['3'];
   const finishedItems = ['5'];
+  const handleCardClick = (id) => {
+    console.log(`Card with id ${id} clicked`);
+  };
 
   const items = cards.map((item) => (
     <Card
