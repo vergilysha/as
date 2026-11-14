@@ -13,6 +13,7 @@ export default function Grid({ cards }) {
       item={item}
       isOpened={openedItems.includes(item.id)}
       isFinished={finishedItems.includes(item.id)}
+      onCardClick={handleCardClick}
     />
   ));
 
